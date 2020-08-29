@@ -198,7 +198,7 @@ class ConfigDataEnvironmentTests {
 	}
 
 	private String getConfigLocation(TestInfo info) {
-		return "classpath:" + info.getTestClass().get().getName().replace('.', '/') + "-"
+		return "optional:classpath:" + info.getTestClass().get().getName().replace('.', '/') + "-"
 				+ info.getTestMethod().get().getName() + ".properties";
 	}
 
@@ -214,9 +214,9 @@ class ConfigDataEnvironmentTests {
 
 		@Override
 		protected ConfigDataLocationResolvers createConfigDataLocationResolvers(DeferredLogFactory logFactory,
-				Binder binder, ResourceLoader resourceLoader) {
+				ConfigDataLocationNotFoundAction locationNotFoundAction, Binder binder, ResourceLoader resourceLoader) {
 			this.configDataLocationResolversBinder = binder;
-			return super.createConfigDataLocationResolvers(logFactory, binder, resourceLoader);
+			return super.createConfigDataLocationResolvers(logFactory, locationNotFoundAction, binder, resourceLoader);
 		}
 
 		Binder getConfigDataLocationResolversBinder() {
